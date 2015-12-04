@@ -1,0 +1,68 @@
+From c9ea63d2559b8dcd32f63fbe87938173ed11b1a8 Mon Sep 17 00:00:00 2001
+From: Mansoor <mansoor@gosign.de>
+Date: Wed, 16 Sep 2015 11:36:55 +0200
+Subject: [PATCH] Version 4.0.2-dev | Fix the FormEngine Issue in 7.5 Dev
+
+---
+ Classes/DataHandler/AbstractDataHandler.php | 14 +++++++-------
+ ext_emconf.php                              |  2 +-
+ 2 files changed, 8 insertions(+), 8 deletions(-)
+
+diff --git a/Classes/DataHandler/AbstractDataHandler.php b/Classes/DataHandler/AbstractDataHandler.php
+index 5957e1f..e315b93 100644
+--- a/Classes/DataHandler/AbstractDataHandler.php
++++ b/Classes/DataHandler/AbstractDataHandler.php
+@@ -50,9 +50,9 @@ abstract class AbstractDataHandler {
+ 	protected $databaseConnection;
+ 
+ 	/**
+-	 * @var \TYPO3\CMS\Backend\Form\FormEngine
++	 * @var \TYPO3\CMS\Backend\Form\FormResultCompiler
+ 	 */
+-	protected $formEngine;
++	protected $formResultCompiler;
+ 
+ 	/**
+ 	 * @var \GridElementsTeam\Gridelements\Backend\LayoutSetup
+@@ -62,12 +62,12 @@ abstract class AbstractDataHandler {
+ 	/**
+ 	 * inject tce forms
+ 	 *
+-	 * @param \TYPO3\CMS\Backend\Form\FormEngine $formEngine
++	 * @param \TYPO3\CMS\Backend\Form\FormResultCompiler $formResultCompiler
+ 	 *
+ 	 * @return void
+ 	 */
+-	public function injectTceForms(\TYPO3\CMS\Backend\Form\FormEngine $formEngine) {
+-		$this->formEngine = $formEngine;
++	public function injectTceForms(\TYPO3\CMS\Backend\Form\FormResultCompiler $formResultCompiler) {
++		$this->formResultCompiler = $formResultCompiler;
+ 	}
+ 
+ 	/**
+@@ -103,8 +103,8 @@ abstract class AbstractDataHandler {
+ 			$this->injectLayoutSetup(GeneralUtility::makeInstance('GridElementsTeam\\Gridelements\\Backend\\LayoutSetup')
+ 			                                                               ->init($pageUid));
+ 		}
+-		if (!$this->formEngine instanceof \TYPO3\CMS\Backend\Form\FormEngine) {
+-			$this->injectTceForms(GeneralUtility::makeInstance('TYPO3\\CMS\\Backend\\Form\\FormEngine'));
++		if (!$this->formResultCompiler instanceof \TYPO3\CMS\Backend\Form\FormResultCompiler) {
++			$this->injectTceForms(GeneralUtility::makeInstance('TYPO3\\CMS\\Backend\\Form\\FormResultCompiler'));
+ 		}
+ 	}
+ 
+diff --git a/ext_emconf.php b/ext_emconf.php
+index 677a099..584f53d 100644
+--- a/ext_emconf.php
++++ b/ext_emconf.php
+@@ -16,7 +16,7 @@ $EM_CONF[$_EXTKEY] = array(
+ It offers a lot of new features like advanced drag & drop or real references, that improve the usability of the page and list module to speed up the daily work with the backend.',
+ 	'category' => 'be',
+ 	'shy' => 0,
+-	'version' => '4.0.1-dev',
++	'version' => '4.0.2-dev',
+ 	'conflicts' => 'templavoila,jfmulticontent',
+ 	'priority' => 'bottom',
+ 	'loadOrder' => '',
+--
+libgit2 0.22.2

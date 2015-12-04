@@ -50,9 +50,9 @@ abstract class AbstractDataHandler {
 	protected $databaseConnection;
 
 	/**
-	 * @var \TYPO3\CMS\Backend\Form\FormEngine
+	 * @var \TYPO3\CMS\Backend\Form\FormResultCompiler
 	 */
-	protected $formEngine;
+	protected $formResultCompiler;
 
 	/**
 	 * @var \GridElementsTeam\Gridelements\Backend\LayoutSetup
@@ -62,12 +62,12 @@ abstract class AbstractDataHandler {
 	/**
 	 * inject tce forms
 	 *
-	 * @param \TYPO3\CMS\Backend\Form\FormEngine $formEngine
+	 * @param \TYPO3\CMS\Backend\Form\FormResultCompiler $formResultCompiler
 	 *
 	 * @return void
 	 */
-	public function injectTceForms(\TYPO3\CMS\Backend\Form\FormEngine $formEngine) {
-		$this->formEngine = $formEngine;
+	public function injectTceForms(\TYPO3\CMS\Backend\Form\FormResultCompiler $formResultCompiler) {
+		$this->formResultCompiler = $formResultCompiler;
 	}
 
 	/**
@@ -103,8 +103,8 @@ abstract class AbstractDataHandler {
 			$this->injectLayoutSetup(GeneralUtility::makeInstance('GridElementsTeam\\Gridelements\\Backend\\LayoutSetup')
 					->init($pageUid));
 		}
-		if (!$this->formEngine instanceof \TYPO3\CMS\Backend\Form\FormEngine) {
-			$this->injectTceForms(GeneralUtility::makeInstance('TYPO3\\CMS\\Backend\\Form\\FormEngine'));
+		if (!$this->formResultCompiler instanceof \TYPO3\CMS\Backend\Form\FormResultCompiler) {
+			$this->injectTceForms(GeneralUtility::makeInstance('TYPO3\\CMS\\Backend\\Form\\FormResultCompiler'));
 		}
 	}
 
