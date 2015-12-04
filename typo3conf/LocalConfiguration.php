@@ -9,9 +9,9 @@ return [
     'DB' => [
         'database' => 'typo3',
         'host' => 'localhost',
-        'password' => 'khatru',
+        'password' => '',
         'socket' => '',
-        'username' => 'typo3',
+        'username' => '',
     ],
     'EXT' => [
         'extConf' => [
